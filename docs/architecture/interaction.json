@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "diagram_type": "sequence",
+  "meta": {
+    "title": "Бункер · взаимодействие на одном ходу",
+    "quality_profile": "showcase",
+    "column_fit": "spread",
+    "viewBox": [
+      1050,
+      620
+    ]
+  },
+  "participants": [
+    {
+      "id": "observer",
+      "type": "frontend",
+      "label": "Зритель",
+      "sublabel": "React"
+    },
+    {
+      "id": "runtime",
+      "type": "backend",
+      "label": "Сервер игры",
+      "sublabel": "FastAPI + Engine"
+    },
+    {
+      "id": "journal",
+      "type": "database",
+      "label": "SQLite",
+      "sublabel": "Журнал · FTS5"
+    },
+    {
+      "id": "players",
+      "type": "cloud",
+      "label": "LLM-игроки",
+      "sublabel": "Yandex Responses API"
+    }
+  ],
+  "messages": [
+    {
+      "id": "collect-intents",
+      "from": "runtime",
+      "to": "players",
+      "y": 170,
+      "label": "Заявки · один публичный снимок",
+      "variant": "emphasis"
+    },
+    {
+      "id": "private-intents",
+      "from": "players",
+      "to": "runtime",
+      "y": 203,
+      "label": "Intent каждого · приватно",
+      "variant": "return",
+      "note": "Слово выбирает код"
+    },
+    {
+      "id": "search-current-docs",
+      "from": "runtime",
+      "to": "journal",
+      "y": 236,
+      "label": "Поиск FTS5 · если запрошен"
+    },
+    {
+      "id": "search-fragments",
+      "from": "journal",
+      "to": "runtime",
+      "y": 269,
+      "label": "До 3 доступных фрагментов",
+      "variant": "return"
+    },
+    {
+      "id": "selected-player-view",
+      "from": "runtime",
+      "to": "players",
+      "y": 302,
+      "label": "PlayerView выбранного игрока",
+      "variant": "emphasis"
+    },
+    {
+      "id": "public-text-deltas",
+      "from": "players",
+      "to": "runtime",
+      "y": 335,
+      "label": "Поток: корневой text",
+      "variant": "return"
+    },
+    {
+      "id": "draft-journal",
+      "from": "runtime",
+      "to": "journal",
+      "y": 368,
+      "label": "Черновик · вне history",
+      "variant": "dashed"
+    },
+    {
+      "id": "draft-to-browser",
+      "from": "runtime",
+      "to": "observer",
+      "y": 401,
+      "label": "SSE: префикс черновика",
+      "variant": "dashed"
+    },
+    {
+      "id": "final-json",
+      "from": "players",
+      "to": "runtime",
+      "y": 434,
+      "label": "Финальный JSON",
+      "variant": "return"
+    },
+    {
+      "id": "acceptance-check",
+      "from": "runtime",
+      "to": "journal",
+      "y": 467,
+      "label": "Проверка → принятый вызов",
+      "variant": "security"
+    },
+    {
+      "id": "commit-public-event",
+      "from": "runtime",
+      "to": "journal",
+      "y": 500,
+      "label": "Принятое действие → history",
+      "variant": "emphasis"
+    },
+    {
+      "id": "accepted-to-browser",
+      "from": "runtime",
+      "to": "observer",
+      "y": 533,
+      "label": "SSE: принято · чтение 4–20 с",
+      "variant": "emphasis"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Очередь слова",
+      "items": [
+        "Заявки параллельны; сеть — до 3 вызовов сразу.",
+        "Приоритет ответа → возражение → новая тема.",
+        "До 8 реплик; не подряд; квота — 2 на игрока."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Если ответ не принят",
+      "items": [
+        "До 4 попыток по 60 с с обратной связью.",
+        "Черновик и ошибочная заметка не входят в history.",
+        "После исчерпания попыток — техническая пауза."
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "После обсуждения",
+      "items": [
+        "Последнее слово → предварительные голоса.",
+        "Защита лидеров → решающие голоса → изгнание.",
+        "3 раунда: трое снаружи, трое получают места."
+      ]
+    }
+  ]
+}

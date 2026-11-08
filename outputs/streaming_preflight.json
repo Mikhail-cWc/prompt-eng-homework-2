@@ -1,0 +1,551 @@
+{
+  "created_at": "2026-10-24T09:23:22.688907+00:00",
+  "purpose": "Three real standalone streaming Speech probes; no game created",
+  "models": [
+    {
+      "model": "deepseek-v4.1-flash",
+      "schema": "Speech",
+      "prefixes": [
+        {
+          "elapsed_ms": 2182.4921669904143,
+          "text": "Я хочу оста"
+        },
+        {
+          "elapsed_ms": 2222.601459128782,
+          "text": "Я хочу остаться в бункере."
+        }
+      ],
+      "status": "passed",
+      "output": {
+        "note": "Проверка связи",
+        "reveal": [],
+        "citations": [],
+        "stage_direction": "",
+        "addressed_to": [],
+        "text": "Я хочу остаться в бункере."
+      },
+      "raw_response": {
+        "id": "cc96e095-9eb6-48bf-b76b-a8a8e15f1dbf",
+        "access_programs": null,
+        "created_at": 1792833803.0,
+        "error": null,
+        "incomplete_details": null,
+        "instructions": "Техническая проверка потока. Верни JSON Speech: text=\"Я хочу остаться в бункере.\", note=\"Проверка связи\", stage_direction=\"\", addressed_to=[], reveal=[], citations=[].\nТЕКУЩЕЕ ДЕЙСТВИЕ: {\"action\": \"Короткая проверка потокового JSON Speech\"}\nJSON Schema:\n{\"additionalProperties\": false, \"properties\": {\"text\": {\"maxLength\": 600, \"minLength\": 1, \"title\": \"Text\", \"type\": \"string\"}, \"stage_direction\": {\"maxLength\": 120, \"title\": \"Stage Direction\", \"type\": \"string\"}, \"addressed_to\": {\"items\": {\"type\": \"string\"}, \"maxItems\": 5, \"title\": \"Addressed To\", \"type\": \"array\"}, \"reveal\": {\"items\": {\"enum\": [\"profession\", \"health\", \"skill\", \"biography\", \"hobby\", \"baggage\"], \"type\": \"string\"}, \"maxItems\": 2, \"title\": \"Reveal\", \"type\": \"array\"}, \"citations\": {\"items\": {\"type\": \"string\"}, \"maxItems\": 3, \"title\": \"Citations\", \"type\": \"array\"}, \"note\": {\"maxLength\": 600, \"title\": \"Note\", \"type\": \"string\"}}, \"required\": [\"text\", \"stage_direction\", \"addressed_to\", \"reveal\", \"citations\", \"note\"], \"title\": \"Speech\", \"type\": \"object\"}",
+        "metadata": {},
+        "model": "gpt://[скрыто]/deepseek-v4.1-flash",
+        "object": "response",
+        "output": [
+          {
+            "id": "d4e37a4a-2c21-40f8-97a3-033372974082",
+            "content": [
+              {
+                "annotations": [],
+                "text": "{\"note\": \"Проверка связи\", \"reveal\": [], \"citations\": [], \"stage_direction\": \"\", \"addressed_to\": [], \"text\": \"Я хочу остаться в бункере.\"}",
+                "type": "output_text",
+                "logprobs": null,
+                "valid": true
+              }
+            ],
+            "role": "assistant",
+            "status": "completed",
+            "type": "message",
+            "phase": null,
+            "valid": true
+          }
+        ],
+        "parallel_tool_calls": false,
+        "temperature": 1.0,
+        "tool_choice": "auto",
+        "tools": [],
+        "top_p": 1.0,
+        "background": false,
+        "completed_at": null,
+        "conversation": null,
+        "max_output_tokens": 1200,
+        "max_tool_calls": null,
+        "moderation": null,
+        "previous_response_id": null,
+        "prompt": null,
+        "prompt_cache_diagnostics": null,
+        "prompt_cache_key": null,
+        "prompt_cache_options": null,
+        "prompt_cache_retention": null,
+        "reasoning": {
+          "context": null,
+          "effort": "none",
+          "generate_summary": null,
+          "mode": null,
+          "summary": null,
+          "valid": true
+        },
+        "safety_identifier": null,
+        "service_tier": "default",
+        "status": "completed",
+        "text": {
+          "format": {
+            "name": "Speech",
+            "schema_": {
+              "additionalProperties": false,
+              "title": "Speech",
+              "type": "object",
+              "properties": {
+                "note": {
+                  "title": "Note",
+                  "type": "string",
+                  "maxLength": 600
+                },
+                "reveal": {
+                  "maxItems": 2,
+                  "title": "Reveal",
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "profession",
+                      "health",
+                      "skill",
+                      "biography",
+                      "hobby",
+                      "baggage"
+                    ]
+                  }
+                },
+                "citations": {
+                  "maxItems": 3,
+                  "title": "Citations",
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "stage_direction": {
+                  "title": "Stage Direction",
+                  "type": "string",
+                  "maxLength": 120
+                },
+                "addressed_to": {
+                  "maxItems": 5,
+                  "title": "Addressed To",
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "text": {
+                  "minLength": 1,
+                  "title": "Text",
+                  "type": "string",
+                  "maxLength": 600
+                }
+              },
+              "required": [
+                "text",
+                "stage_direction",
+                "addressed_to",
+                "reveal",
+                "citations",
+                "note"
+              ]
+            },
+            "type": "json_schema",
+            "description": null,
+            "strict": true,
+            "valid": true
+          },
+          "verbosity": null,
+          "valid": true
+        },
+        "top_logprobs": null,
+        "truncation": null,
+        "usage": {
+          "input_tokens": 657,
+          "input_tokens_details": {
+            "cache_write_tokens": null,
+            "cached_tokens": 0,
+            "valid": true,
+            "tool_tokens": 0
+          },
+          "output_tokens": 48,
+          "output_tokens_details": {
+            "reasoning_tokens": 0,
+            "valid": true
+          },
+          "total_tokens": 705,
+          "valid": true
+        },
+        "user": null,
+        "valid": true
+      },
+      "usage": {
+        "input_tokens": 657,
+        "input_tokens_details": {
+          "cache_write_tokens": null,
+          "cached_tokens": 0,
+          "valid": true,
+          "tool_tokens": 0
+        },
+        "output_tokens": 48,
+        "output_tokens_details": {
+          "reasoning_tokens": 0,
+          "valid": true
+        },
+        "total_tokens": 705,
+        "valid": true
+      },
+      "duration_ms": 2258.554207859561,
+      "elapsed_ms": 2350.2102089114487
+    },
+    {
+      "model": "qwen3.6-35b-a3b",
+      "schema": "Speech",
+      "prefixes": [],
+      "status": "failed",
+      "error": "ValidationError: 4 validation errors for Speech\ntext\n  Field required [type=missing, input_value={'invalid_response': '```..., 'status': 'completed'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/missing\nnote\n  Field required [type=missing, input_value={'invalid_response': '```..., 'status': 'completed'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/missing\ninvalid_response\n  Extra inputs are not permitted [type=extra_forbidden, input_value='```json\\n{\\n  \"text\": \"...а связи\"\\n}\\n```', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden\nstatus\n  Extra inputs are not permitted [type=extra_forbidden, input_value='completed', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden",
+      "elapsed_ms": 392.66937505453825
+    },
+    {
+      "model": "aliceai-llm-flash",
+      "schema": "Speech",
+      "prefixes": [
+        {
+          "elapsed_ms": 1122.0514590386301,
+          "text": "Я"
+        },
+        {
+          "elapsed_ms": 1122.7918341755867,
+          "text": "Я хочу"
+        },
+        {
+          "elapsed_ms": 1122.9921670164913,
+          "text": "Я хочу остаться"
+        },
+        {
+          "elapsed_ms": 1123.2240840326995,
+          "text": "Я хочу остаться в"
+        },
+        {
+          "elapsed_ms": 1123.452499974519,
+          "text": "Я хочу остаться в бу"
+        },
+        {
+          "elapsed_ms": 1123.667374951765,
+          "text": "Я хочу остаться в бунк"
+        },
+        {
+          "elapsed_ms": 1123.9093751646578,
+          "text": "Я хочу остаться в бункере"
+        },
+        {
+          "elapsed_ms": 1124.1210841108114,
+          "text": "Я хочу остаться в бункере."
+        }
+      ],
+      "status": "passed",
+      "output": {
+        "note": "Проверка связи",
+        "reveal": [],
+        "citations": [],
+        "stage_direction": "",
+        "addressed_to": [],
+        "text": "Я хочу остаться в бункере."
+      },
+      "raw_response": {
+        "id": "1ec50541-4d6b-4c8f-8946-93acf9a991d4",
+        "access_programs": null,
+        "created_at": 1792833805.0,
+        "error": null,
+        "incomplete_details": null,
+        "instructions": "Техническая проверка потока. Верни JSON Speech: text=\"Я хочу остаться в бункере.\", note=\"Проверка связи\", stage_direction=\"\", addressed_to=[], reveal=[], citations=[].\nТЕКУЩЕЕ ДЕЙСТВИЕ: {\"action\": \"Короткая проверка потокового JSON Speech\"}\nJSON Schema:\n{\"additionalProperties\": false, \"properties\": {\"text\": {\"maxLength\": 600, \"minLength\": 1, \"title\": \"Text\", \"type\": \"string\"}, \"stage_direction\": {\"maxLength\": 120, \"title\": \"Stage Direction\", \"type\": \"string\"}, \"addressed_to\": {\"items\": {\"type\": \"string\"}, \"maxItems\": 5, \"title\": \"Addressed To\", \"type\": \"array\"}, \"reveal\": {\"items\": {\"enum\": [\"profession\", \"health\", \"skill\", \"biography\", \"hobby\", \"baggage\"], \"type\": \"string\"}, \"maxItems\": 2, \"title\": \"Reveal\", \"type\": \"array\"}, \"citations\": {\"items\": {\"type\": \"string\"}, \"maxItems\": 3, \"title\": \"Citations\", \"type\": \"array\"}, \"note\": {\"maxLength\": 600, \"title\": \"Note\", \"type\": \"string\"}}, \"required\": [\"text\", \"stage_direction\", \"addressed_to\", \"reveal\", \"citations\", \"note\"], \"title\": \"Speech\", \"type\": \"object\"}",
+        "metadata": {},
+        "model": "gpt://[скрыто]/aliceai-llm-flash",
+        "object": "response",
+        "output": [
+          {
+            "id": "4039083b-3e7b-4f70-8257-917d1dd8508e",
+            "content": [
+              {
+                "annotations": [],
+                "text": "{\"note\": \"Проверка связи\", \"reveal\": [], \"citations\": [], \"stage_direction\": \"\", \"addressed_to\": [], \"text\": \"Я хочу остаться в бункере.\"}",
+                "type": "output_text",
+                "logprobs": null,
+                "valid": true
+              }
+            ],
+            "role": "assistant",
+            "status": "completed",
+            "type": "message",
+            "phase": null,
+            "valid": true
+          }
+        ],
+        "parallel_tool_calls": false,
+        "temperature": 1.0,
+        "tool_choice": "auto",
+        "tools": [],
+        "top_p": 1.0,
+        "background": false,
+        "completed_at": null,
+        "conversation": null,
+        "max_output_tokens": 1200,
+        "max_tool_calls": null,
+        "moderation": null,
+        "previous_response_id": null,
+        "prompt": null,
+        "prompt_cache_diagnostics": null,
+        "prompt_cache_key": null,
+        "prompt_cache_options": null,
+        "prompt_cache_retention": null,
+        "reasoning": null,
+        "safety_identifier": null,
+        "service_tier": "default",
+        "status": "completed",
+        "text": {
+          "format": {
+            "name": "Speech",
+            "schema_": {
+              "additionalProperties": false,
+              "title": "Speech",
+              "type": "object",
+              "properties": {
+                "note": {
+                  "title": "Note",
+                  "type": "string",
+                  "maxLength": 600
+                },
+                "reveal": {
+                  "maxItems": 2,
+                  "title": "Reveal",
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "profession",
+                      "health",
+                      "skill",
+                      "biography",
+                      "hobby",
+                      "baggage"
+                    ]
+                  }
+                },
+                "citations": {
+                  "maxItems": 3,
+                  "title": "Citations",
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "stage_direction": {
+                  "title": "Stage Direction",
+                  "type": "string",
+                  "maxLength": 120
+                },
+                "addressed_to": {
+                  "maxItems": 5,
+                  "title": "Addressed To",
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "text": {
+                  "minLength": 1,
+                  "title": "Text",
+                  "type": "string",
+                  "maxLength": 600
+                }
+              },
+              "required": [
+                "text",
+                "stage_direction",
+                "addressed_to",
+                "reveal",
+                "citations",
+                "note"
+              ]
+            },
+            "type": "json_schema",
+            "description": null,
+            "strict": true,
+            "valid": true
+          },
+          "verbosity": null,
+          "valid": true
+        },
+        "top_logprobs": null,
+        "truncation": null,
+        "usage": {
+          "input_tokens": 351,
+          "input_tokens_details": {
+            "cache_write_tokens": null,
+            "cached_tokens": 0,
+            "valid": true,
+            "tool_tokens": 0
+          },
+          "output_tokens": 43,
+          "output_tokens_details": {
+            "reasoning_tokens": 0,
+            "valid": true
+          },
+          "total_tokens": 394,
+          "valid": true
+        },
+        "user": null,
+        "valid": true
+      },
+      "usage": {
+        "input_tokens": 351,
+        "input_tokens_details": {
+          "cache_write_tokens": null,
+          "cached_tokens": 0,
+          "valid": true,
+          "tool_tokens": 0
+        },
+        "output_tokens": 43,
+        "output_tokens_details": {
+          "reasoning_tokens": 0,
+          "valid": true
+        },
+        "total_tokens": 394,
+        "valid": true
+      },
+      "duration_ms": 1125.9090839885175,
+      "elapsed_ms": 1127.2529170382768
+    },
+    {
+      "model": "qwen3.6-35b-a3b",
+      "schema": "Speech",
+      "prefixes": [
+        {
+          "elapsed_ms": 376.4492080081254,
+          "text": "Я хочу"
+        },
+        {
+          "elapsed_ms": 384.10158292390406,
+          "text": "Я хочу остаться в бунк"
+        },
+        {
+          "elapsed_ms": 390.44900005683303,
+          "text": "Я хочу остаться в бункере."
+        }
+      ],
+      "attempt": 2,
+      "output": {
+        "note": "Проверка связи",
+        "text": "Я хочу остаться в бункере.",
+        "stage_direction": "",
+        "addressed_to": [],
+        "reveal": [],
+        "citations": []
+      },
+      "raw_response": {
+        "id": "989fcc3c-650d-49c6-ad64-7966c29311c0",
+        "access_programs": null,
+        "created_at": 1792834025.0,
+        "error": null,
+        "incomplete_details": null,
+        "instructions": "Техническая проверка потока. Верни JSON Speech: text=\"Я хочу остаться в бункере.\", note=\"Проверка связи\", stage_direction=\"\", addressed_to=[], reveal=[], citations=[].\nТЕКУЩЕЕ ДЕЙСТВИЕ: {\"action\": \"Короткая проверка потокового JSON Speech\"}\nJSON Schema:\n{\"additionalProperties\": false, \"properties\": {\"text\": {\"maxLength\": 600, \"minLength\": 1, \"title\": \"Text\", \"type\": \"string\"}, \"stage_direction\": {\"maxLength\": 120, \"title\": \"Stage Direction\", \"type\": \"string\"}, \"addressed_to\": {\"items\": {\"type\": \"string\"}, \"maxItems\": 5, \"title\": \"Addressed To\", \"type\": \"array\"}, \"reveal\": {\"items\": {\"enum\": [\"profession\", \"health\", \"skill\", \"biography\", \"hobby\", \"baggage\"], \"type\": \"string\"}, \"maxItems\": 2, \"title\": \"Reveal\", \"type\": \"array\"}, \"citations\": {\"items\": {\"type\": \"string\"}, \"maxItems\": 3, \"title\": \"Citations\", \"type\": \"array\"}, \"note\": {\"maxLength\": 600, \"title\": \"Note\", \"type\": \"string\"}}, \"required\": [\"text\", \"stage_direction\", \"addressed_to\", \"reveal\", \"citations\", \"note\"], \"title\": \"Speech\", \"type\": \"object\"}",
+        "metadata": {},
+        "model": "gpt://[скрыто]/qwen3.6-35b-a3b",
+        "object": "response",
+        "output": [
+          {
+            "id": "14b9ec80-2370-47c5-b6a1-b4c1671664a2",
+            "content": [
+              {
+                "annotations": [],
+                "text": "{\n\"note\": \"Проверка связи\",\n\"text\": \"Я хочу остаться в бункере.\",\n\"stage_direction\": \"\",\n\"addressed_to\": [],\n\"reveal\": [],\n\"citations\": []\n}",
+                "type": "output_text",
+                "logprobs": null,
+                "valid": true
+              }
+            ],
+            "role": "assistant",
+            "status": "completed",
+            "type": "message",
+            "phase": null,
+            "valid": true
+          }
+        ],
+        "parallel_tool_calls": false,
+        "temperature": 1.0,
+        "tool_choice": "auto",
+        "tools": [],
+        "top_p": 1.0,
+        "background": false,
+        "completed_at": null,
+        "conversation": null,
+        "max_output_tokens": 1200,
+        "max_tool_calls": null,
+        "moderation": null,
+        "previous_response_id": null,
+        "prompt": null,
+        "prompt_cache_diagnostics": null,
+        "prompt_cache_key": null,
+        "prompt_cache_options": null,
+        "prompt_cache_retention": null,
+        "reasoning": {
+          "context": null,
+          "effort": "none",
+          "generate_summary": null,
+          "mode": null,
+          "summary": null,
+          "valid": true
+        },
+        "safety_identifier": null,
+        "service_tier": "default",
+        "status": "completed",
+        "text": {
+          "format": {
+            "type": "text",
+            "valid": true
+          },
+          "verbosity": null,
+          "valid": true
+        },
+        "top_logprobs": null,
+        "truncation": null,
+        "usage": {
+          "input_tokens": 352,
+          "input_tokens_details": {
+            "cache_write_tokens": null,
+            "cached_tokens": 0,
+            "valid": true,
+            "tool_tokens": 0
+          },
+          "output_tokens": 49,
+          "output_tokens_details": {
+            "reasoning_tokens": 0,
+            "valid": true
+          },
+          "total_tokens": 401,
+          "valid": true
+        },
+        "user": null,
+        "valid": true
+      },
+      "usage": {
+        "input_tokens": 352,
+        "input_tokens_details": {
+          "cache_write_tokens": null,
+          "cached_tokens": 0,
+          "valid": true,
+          "tool_tokens": 0
+        },
+        "output_tokens": 49,
+        "output_tokens_details": {
+          "reasoning_tokens": 0,
+          "valid": true
+        },
+        "total_tokens": 401,
+        "valid": true
+      },
+      "duration_ms": 595.8871669135988,
+      "status": "passed",
+      "elapsed_ms": 688.7591660488397
+    }
+  ],
+  "actual_http_calls": 4,
+  "verification_note": "The original Qwen failure preserved its actual validation error but not full raw response. One authorized Qwen-only retry verifies strict Markdown-envelope compatibility; original three records retained."
+}

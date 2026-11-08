@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Бункер · что доступно LLM",
+    "quality_profile": "showcase",
+    "viewBox": [1380, 780]
+  },
+  "components": [
+    {"id":"player-agent","type":"backend","label":"LLM-игрок","sublabel":"Личная цель — остаться в бункере","pos":[60,320],"size":[300,120]},
+    {"id":"word-request","type":"backend","label":"Intent","sublabel":"kind · goal · search_query","pos":[560,140],"size":[280,110]},
+    {"id":"document-tool","type":"backend","label":"search_documents","sublabel":"Единственный инструмент игрока","pos":[1060,140],"size":[300,110]},
+    {"id":"tool-response","type":"database","label":"Результат поиска","sublabel":"До 3 фрагментов по 600 символов","pos":[1060,540],"size":[300,100]},
+    {"id":"speech-context","type":"security","label":"PlayerView","sublabel":"Своя карточка · history · note","pos":[560,540],"size":[280,100]}
+  ],
+  "connections": [
+    {"id":"agent-intent","from":"player-agent","to":"word-request","label":"Подать JSON-заявку","variant":"emphasis"},
+    {"id":"selected-intent-search","from":"word-request","to":"document-tool","label":"Выбран + search_query","variant":"emphasis"},
+    {"id":"search-response","from":"document-tool","to":"tool-response","label":"Один поиск","variant":"emphasis","labelAt":[1210,400]},
+    {"id":"fragments-in-context","from":"tool-response","to":"speech-context","label":"id · title · text","variant":"emphasis"},
+    {"id":"context-for-speech","from":"speech-context","to":"player-agent","label":"Контекст для Speech","variant":"security"}
+  ],
+  "cards": [
+    {"dot":"cyan","title":"Speech · речь и раскрытие","items":["text: до 600; защита и последнее слово — до 350.","reveal: две карты в обязательном выступлении.","addressed_to — игроки; citations — документы."]},
+    {"dot":"violet","title":"Vote · закрытый голос","items":["candidate_id + reason + личная note.","Выбор среди оставшихся, кроме себя.","Предварительный голос → защита → решающий."]},
+    {"dot":"amber","title":"note · личная память","items":["Поле принятого JSON, не отдельный инструмент.","Возвращается игроку как self.note.","Другие игроки не получают эту заметку."]}
+  ]
+}

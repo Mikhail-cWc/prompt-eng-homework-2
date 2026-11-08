@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Бункер · архитектура игры",
+    "quality_profile": "showcase",
+    "viewBox": [1380, 780]
+  },
+  "components": [
+    {"id":"spectator-ui","type":"frontend","label":"Сайт наблюдения","sublabel":"React · сцена и запись","pos":[50,160],"size":[250,100]},
+    {"id":"local-api","type":"backend","label":"FastAPI","sublabel":"web.py · команды и SSE","pos":[540,160],"size":[250,100]},
+    {"id":"game-engine","type":"backend","label":"Движок партии","sublabel":"engine.py · rules.py · context.py","pos":[1030,160],"size":[290,100],"tag":"Правила исполняет код"},
+    {"id":"durable-store","type":"database","label":"SQLite + FTS5","sublabel":"storage.py · журнал и поиск","pos":[50,540],"size":[250,100]},
+    {"id":"cloud-models","type":"cloud","label":"Yandex AI Studio","sublabel":"6 игроков · ведущий · сценарист","pos":[540,540],"size":[280,100]},
+    {"id":"model-adapter","type":"backend","label":"YandexProvider","sublabel":"provider.py · JSON и поток","pos":[1030,540],"size":[290,100]}
+  ],
+  "connections": [
+    {"id":"viewer-commands","from":"spectator-ui","to":"local-api","label":"REST: команды","variant":"emphasis","labelAt":[400,186]},
+    {"id":"viewer-events","from":"local-api","to":"spectator-ui","label":"SSE по seq","variant":"dashed","labelAt":[350,244]},
+    {"id":"api-engine","from":"local-api","to":"game-engine","label":"Запуск / пауза","variant":"emphasis"},
+    {"id":"engine-adapter","from":"game-engine","to":"model-adapter","label":"Только PlayerView","variant":"emphasis","labelAt":[1210,485]},
+    {"id":"adapter-models","from":"model-adapter","to":"cloud-models","label":"Responses API","variant":"emphasis"},
+    {"id":"engine-durability","from":"game-engine","to":"durable-store","label":"Состояние и события","fromSide":"bottom","toSide":"top"},
+    {"id":"api-event-read","from":"durable-store","to":"local-api","label":"Снимок и журнал"}
+  ],
+  "cards": [
+    {"dot":"emerald","title":"Решения и правила","items":["LLM выбирает аргументы, заявки и голоса.","Код задаёт очередь, лимиты и изгнание.","Ведущий описывает факты, не выбирает победителей."]},
+    {"dot":"violet","title":"Изоляция контекста","items":["Своя карточка + заметка + публичная история.","Чужие секреты и текущие голоса скрыты.","Инспектор зрителя не передаётся игрокам."]},
+    {"dot":"amber","title":"Сохранение и восстановление","items":["Сначала запись в SQLite, затем выдача через SSE.","action_key защищает от повторения принятого хода.","После перезапуска — пауза; запись без вызовов LLM."]}
+  ]
+}

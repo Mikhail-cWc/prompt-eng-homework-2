@@ -1,0 +1,22 @@
+[project]
+name = "bunker-theatre"
+version = "0.1.0"
+description = "Автономная игра Бункер для LLM и локальный театр наблюдения"
+requires-python = ">=3.11"
+dependencies = ["fastapi>=0.135", "uvicorn>=0.30", "openai>=2", "pydantic>=2.10", "python-dotenv>=1", "tiktoken>=0.9"]
+
+[dependency-groups]
+dev = ["pytest>=8", "pytest-asyncio>=1", "httpx>=0.28", "black>=25", "ruff>=0.12", "nbformat>=5", "nbclient>=0.10", "ipykernel>=6"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+ignore = ["E501"]

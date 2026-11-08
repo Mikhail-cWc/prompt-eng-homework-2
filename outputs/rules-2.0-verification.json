@@ -1,0 +1,38 @@
+{
+  "game_id": "9e567f401651",
+  "rules_version": "2.0",
+  "status": "completed",
+  "winners": [
+    "p1",
+    "p2",
+    "p4"
+  ],
+  "eliminations": [
+    "p3",
+    "p6",
+    "p5"
+  ],
+  "public_events": 77,
+  "model_attempts": 264,
+  "completed_calls": 190,
+  "failed_calls": 74,
+  "models": {
+    "deepseek-v4.1-flash": 81,
+    "qwen3.6-35b-a3b": 144,
+    "aliceai-llm-flash": 39
+  },
+  "tool_calls": 13,
+  "tool_hits": 5,
+  "input_tokens": 3327588,
+  "output_tokens": 49651,
+  "pause_events": 1,
+  "technical_pauses": 14,
+  "checks": [
+    "6→3",
+    "three_unique_eliminations",
+    "speech_quotas",
+    "no_consecutive_speaker",
+    "no_self_votes",
+    "player_context_isolation"
+  ]
+}
