@@ -5,6 +5,25 @@ from fastapi.testclient import TestClient
 from bunker.web import create_app
 
 
+def test_read_only_mode_blocks_game_commands_even_with_credentials(
+    tmp_path, provider, monkeypatch
+):
+    provider.configured = True
+    monkeypatch.setenv("BUNKER_READ_ONLY", "1")
+    with TestClient(create_app(tmp_path / "replay.sqlite3", provider)) as client:
+        health = client.get("/api/health").json()
+        assert health["read_only"] is True
+        assert health["configured"] is False
+        assert client.post("/api/games", json={}).status_code == 403
+        assert (
+            client.post(
+                "/api/games/demo/commands", json={"action": "start"}
+            ).status_code
+            == 403
+        )
+        assert client.get("/api/games").json() == []
+
+
 def test_api_controls_exports_and_inspector(tmp_path, provider):
     provider.configured = True
     with TestClient(create_app(tmp_path / "web.sqlite3", provider)) as client:

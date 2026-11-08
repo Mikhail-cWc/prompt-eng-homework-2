@@ -29,6 +29,7 @@ let snapshot: GameState
 let emptyGames: boolean
 let failNetwork: boolean
 let configured: boolean
+let readOnly: boolean
 let streamSnapshot: SpeechStream | null
 type MockFetch = (url: string, options?: RequestInit) => Promise<{ ok: boolean; status?: number; json: () => Promise<unknown> }>
 let fetchMock: ReturnType<typeof vi.fn<MockFetch>>
@@ -53,12 +54,13 @@ beforeEach(() => {
   emptyGames = false
   failNetwork = false
   configured = true
+  readOnly = false
   streamSnapshot = null
   fetchMock = vi.fn(async (url: string, options?: RequestInit) => {
     if (options?.method && options.method !== 'GET') throw new Error('Mutating requests forbidden by this recording test')
     if (failNetwork) throw new TypeError('Failed to fetch')
     let value: unknown
-    if (url === '/api/health') value = { configured }
+    if (url === '/api/health') value = { configured, read_only: readOnly }
     else if (url === '/api/games') value = emptyGames ? [] : [snapshot]
     else if (url === `/api/games/${snapshot.id}`) value = snapshot
     else if (url === `/api/games/${snapshot.id}/presentation`) value = { game: snapshot, stream: streamSnapshot, event_seq: Math.max(0, ...snapshot.history.map(e => e.seq), streamSnapshot?.seq || 0) }
@@ -255,6 +257,17 @@ describe('recording screen integration with mocked transport', () => {
 })
 
 describe('visible operational states with mocked transport', () => {
+  it('offers playback but no game creation in the public demo', async () => {
+    configured = false
+    readOnly = true
+    await render()
+    await click('Меню партии')
+    expect(button('Воспроизвести запись').disabled).toBe(false)
+    expect(document.body.textContent).not.toContain('Новая партия')
+    expect(document.body.textContent).not.toContain('Подключите Yandex AI Studio')
+    expectReadOnly()
+  })
+
   it('shows the empty state and disables paid preparation when credentials are unavailable', async () => {
     emptyGames = true
     configured = false

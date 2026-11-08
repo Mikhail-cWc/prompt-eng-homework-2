@@ -15,7 +15,7 @@
 - [Скриншоты сцены](docs/screenshots/README.md).
 
 В экспортированных журналах замаскирован идентификатор облачного каталога.
-Локальная OpenWeight-модель, озвучивание и публичный хостинг в работу не входят.
+Локальная OpenWeight-модель и озвучивание в работу не входят.
 
 ## Просмотр партии на сайте без ключей
 
@@ -32,6 +32,26 @@ BUNKER_DB=data/replay.sqlite3 uv run --locked python -m bunker
 Откройте [localhost:8000](http://127.0.0.1:8000) и нажмите «Смотреть запись».
 Импорт сохраняет настоящие события и вызовы для инспектора в отдельной базе;
 просмотр не обращается к API моделей.
+
+## Демо на Render
+
+Один Python Web Service на тарифе Free. В переменных окружения задайте
+`BUNKER_READ_ONLY=1` и `BUNKER_DB=data/replay.sqlite3`. Сервис открывает запись,
+карточки, журнал и экспорт. Команды управления игрой отключены; ключи не нужны.
+
+**Build Command**
+
+```sh
+uv sync --locked --no-dev && npm ci --include=dev --prefix frontend && npm run build --prefix frontend
+```
+
+**Start Command**
+
+```sh
+.venv/bin/python -m scripts.load_replay && exec .venv/bin/uvicorn bunker.web:app --host 0.0.0.0 --port "$PORT" --workers 1
+```
+
+Запись импортируется из репозитория при старте, поэтому постоянный диск не нужен.
 
 ## Запуск новой партии
 

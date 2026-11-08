@@ -65,6 +65,8 @@ class Command(BaseModel):
 
 
 def create_app(db_path=None, provider=None) -> FastAPI:
+    read_only = os.environ.get("BUNKER_READ_ONLY") == "1"
+
     @asynccontextmanager
     async def lifespan(app):
         store = Store(
@@ -83,6 +85,8 @@ def create_app(db_path=None, provider=None) -> FastAPI:
 
     @app.middleware("http")
     async def local_commands(request: Request, call_next):
+        if read_only and request.method not in {"GET", "HEAD", "OPTIONS"}:
+            return PlainTextResponse("Доступен только просмотр записи", status_code=403)
         # Локальное управление не должно запускаться со страницы постороннего сайта.
         if request.method in {"POST", "PUT", "DELETE"}:
             origin = request.headers.get("origin")
@@ -106,7 +110,8 @@ def create_app(db_path=None, provider=None) -> FastAPI:
     @app.get("/api/health")
     async def health():
         return {
-            "configured": engine().provider.configured,
+            "configured": not read_only and engine().provider.configured,
+            "read_only": read_only,
             "service": "bunker",
             "prompt_version": PROMPT_VERSION,
         }
